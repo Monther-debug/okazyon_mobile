@@ -104,6 +104,7 @@ class SignupScreen extends ConsumerWidget {
                   children: [
                     Checkbox(
                       value: agreeToTerms,
+                      activeColor: AppColors.primary,
                       onChanged: (value) {
                         ref.read(agreeToTermsProvider.notifier).state =
                             value ?? false;
