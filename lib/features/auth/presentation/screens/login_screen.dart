@@ -6,16 +6,40 @@ import 'package:okazyon_mobile/core/utils/validators.dart';
 import 'package:okazyon_mobile/core/widgets/custom_button.dart';
 import 'package:okazyon_mobile/core/widgets/custom_text_field.dart';
 import 'package:okazyon_mobile/core/widgets/google_button.dart';
+import 'package:okazyon_mobile/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:okazyon_mobile/features/auth/presentation/controllers/login_controller.dart';
 import 'package:okazyon_mobile/features/auth/presentation/screens/signup_screen.dart';
 
-class LoginScreen extends ConsumerWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final formKey = GlobalKey<FormState>();
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    final authState = ref.watch(authControllerProvider);
+    final loginFormState = ref.watch(loginFormControllerProvider);
+    final controllers = ref.watch(loginTextControllersProvider);
+
+    ref.listen<AuthState>(authControllerProvider, (previous, next) {
+      if (next.error != null) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(next.error!)));
+        ref.read(authControllerProvider.notifier).clearError();
+      }
+
+      if (next.isAuthenticated) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Login successful!')));
+      }
+    });
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -41,7 +65,7 @@ class LoginScreen extends ConsumerWidget {
                 CustomTextField(
                   labelText: 'Email',
                   hintText: 'Enter your email',
-                  controller: emailController,
+                  controller: controllers['email']!,
                   validator: CustomValidator.email,
                   suffixIcon: Icons.email_outlined,
                 ),
@@ -49,10 +73,18 @@ class LoginScreen extends ConsumerWidget {
                 CustomTextField(
                   labelText: 'Password',
                   hintText: 'Enter your password',
-                  controller: passwordController,
+                  controller: controllers['password']!,
                   validator: CustomValidator.password,
-                  obscureText: true,
-                  suffixIcon: Icons.lock_outline,
+                  obscureText: loginFormState.obscurePassword,
+                  suffixIcon:
+                      loginFormState.obscurePassword
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                  onSuffixIconPressed: () {
+                    ref
+                        .read(loginFormControllerProvider.notifier)
+                        .togglePasswordVisibility();
+                  },
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 Align(
@@ -67,12 +99,20 @@ class LoginScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomButton(
-                  text: 'Login',
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      // Handle login
-                    }
-                  },
+                  text: authState.isLoading ? 'Logging in...' : 'Login',
+                  onPressed:
+                      authState.isLoading
+                          ? () {}
+                          : () async {
+                            if (formKey.currentState!.validate()) {
+                              await ref
+                                  .read(authControllerProvider.notifier)
+                                  .login(
+                                    controllers['email']!.text,
+                                    controllers['password']!.text,
+                                  );
+                            }
+                          },
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 Row(
@@ -98,7 +138,16 @@ class LoginScreen extends ConsumerWidget {
                 const SizedBox(height: AppSizes.widgetSpacing),
                 const Text('Or continue with'),
                 const SizedBox(height: AppSizes.widgetSpacing),
-                GoogleButton(onPressed: () {}),
+                GoogleButton(
+                  onPressed:
+                      authState.isLoading
+                          ? () {}
+                          : () async {
+                            await ref
+                                .read(authControllerProvider.notifier)
+                                .loginWithGoogle();
+                          },
+                ),
               ],
             ),
           ),

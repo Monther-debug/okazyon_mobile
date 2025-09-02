@@ -6,26 +6,42 @@ import 'package:okazyon_mobile/core/constants/sizes.dart';
 import 'package:okazyon_mobile/core/utils/validators.dart';
 import 'package:okazyon_mobile/core/widgets/custom_button.dart';
 import 'package:okazyon_mobile/core/widgets/custom_text_field.dart';
+import 'package:okazyon_mobile/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:okazyon_mobile/features/auth/presentation/controllers/signup_controller.dart';
 import 'package:okazyon_mobile/features/auth/presentation/screens/login_screen.dart';
 
-final obscurePasswordProvider = StateProvider<bool>((ref) => true);
-final obscureConfirmPasswordProvider = StateProvider<bool>((ref) => true);
-final agreeToTermsProvider = StateProvider<bool>((ref) => false);
-
-class SignupScreen extends ConsumerWidget {
+class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final formKey = GlobalKey<FormState>();
-    final usernameController = TextEditingController();
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
-    final confirmPasswordController = TextEditingController();
+  ConsumerState<SignupScreen> createState() => _SignupScreenState();
+}
 
-    final obscurePassword = ref.watch(obscurePasswordProvider);
-    final obscureConfirmPassword = ref.watch(obscureConfirmPasswordProvider);
-    final agreeToTerms = ref.watch(agreeToTermsProvider);
+class _SignupScreenState extends ConsumerState<SignupScreen> {
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    final authState = ref.watch(authControllerProvider);
+    final signupFormState = ref.watch(signupFormControllerProvider);
+    final controllers = ref.watch(signupTextControllersProvider);
+
+    // Listen to auth state changes
+    ref.listen<AuthState>(authControllerProvider, (previous, next) {
+      if (next.error != null) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(next.error!)));
+        ref.read(authControllerProvider.notifier).clearError();
+      }
+
+      if (next.isAuthenticated) {
+        // Navigate to home screen or show success message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Account created successfully!')),
+        );
+      }
+    });
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -53,61 +69,64 @@ class SignupScreen extends ConsumerWidget {
                 CustomTextField(
                   labelText: 'Username',
                   hintText: 'Choose a username',
-                  controller: usernameController,
+                  controller: controllers['username']!,
                   validator: CustomValidator.username,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
                   labelText: 'Email Address',
                   hintText: 'you@example.com',
-                  controller: emailController,
+                  controller: controllers['email']!,
                   validator: CustomValidator.email,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
                   labelText: 'Password',
                   hintText: 'Create a strong password',
-                  controller: passwordController,
+                  controller: controllers['password']!,
                   validator: CustomValidator.password,
-                  obscureText: obscurePassword,
+                  obscureText: signupFormState.obscurePassword,
                   suffixIcon:
-                      obscurePassword
+                      signupFormState.obscurePassword
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined,
                   onSuffixIconPressed: () {
-                    ref.read(obscurePasswordProvider.notifier).state =
-                        !obscurePassword;
+                    ref
+                        .read(signupFormControllerProvider.notifier)
+                        .togglePasswordVisibility();
                   },
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
                   labelText: 'Confirm Password',
                   hintText: 'Enter your password again',
-                  controller: confirmPasswordController,
+                  controller: controllers['confirmPassword']!,
                   validator:
                       (value) => CustomValidator.confirmPassword(
                         value,
-                        passwordController.text,
+                        controllers['password']!.text,
                       ),
-                  obscureText: obscureConfirmPassword,
+                  obscureText: signupFormState.obscureConfirmPassword,
                   suffixIcon:
-                      obscureConfirmPassword
+                      signupFormState.obscureConfirmPassword
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined,
                   onSuffixIconPressed: () {
-                    ref.read(obscureConfirmPasswordProvider.notifier).state =
-                        !obscureConfirmPassword;
+                    ref
+                        .read(signupFormControllerProvider.notifier)
+                        .toggleConfirmPasswordVisibility();
                   },
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 Row(
                   children: [
                     Checkbox(
-                      value: agreeToTerms,
+                      value: signupFormState.agreeToTerms,
                       activeColor: AppColors.primary,
                       onChanged: (value) {
-                        ref.read(agreeToTermsProvider.notifier).state =
-                            value ?? false;
+                        ref
+                            .read(signupFormControllerProvider.notifier)
+                            .toggleAgreeToTerms(value);
                       },
                     ),
                     Expanded(
@@ -139,21 +158,24 @@ class SignupScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomButton(
-                  text: 'Sign up',
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      if (!agreeToTerms) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              'Please agree to the terms and conditions',
-                            ),
-                          ),
-                        );
-                        return;
-                      }
-                    }
-                  },
+                  text: authState.isLoading ? 'Creating Account...' : 'Sign up',
+                  onPressed:
+                      authState.isLoading
+                          ? () {}
+                          : () async {
+                            if (formKey.currentState!.validate()) {
+                              await ref
+                                  .read(authControllerProvider.notifier)
+                                  .signup(
+                                    username: controllers['username']!.text,
+                                    email: controllers['email']!.text,
+                                    password: controllers['password']!.text,
+                                    confirmPassword:
+                                        controllers['confirmPassword']!.text,
+                                    agreeToTerms: signupFormState.agreeToTerms,
+                                  );
+                            }
+                          },
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 Row(
