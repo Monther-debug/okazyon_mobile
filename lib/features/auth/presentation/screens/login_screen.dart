@@ -6,6 +6,7 @@ import 'package:okazyon_mobile/core/utils/validators.dart';
 import 'package:okazyon_mobile/core/widgets/custom_button.dart';
 import 'package:okazyon_mobile/core/widgets/custom_text_field.dart';
 import 'package:okazyon_mobile/core/widgets/google_button.dart';
+import 'package:okazyon_mobile/features/auth/presentation/screens/signup_screen.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
@@ -79,7 +80,14 @@ class LoginScreen extends ConsumerWidget {
                   children: [
                     const Text("Don't have an account?"),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignupScreen(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Sign Up',
                         style: TextStyle(color: AppColors.primary),
