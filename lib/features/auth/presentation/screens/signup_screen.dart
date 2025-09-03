@@ -67,21 +67,21 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 ),
                 SizedBox(height: AppSizes.screenHeight(context) * 0.05),
                 CustomTextField(
-                  labelText: 'Username',
+                  // labelText: 'Username',
                   hintText: 'Choose a username',
                   controller: controllers['username']!,
                   validator: CustomValidator.username,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  labelText: 'Phone Number',
+                  // labelText: 'Phone Number',
                   hintText: 'Enter your phone number',
                   controller: controllers['phone']!,
                   validator: CustomValidator.phone,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  labelText: 'Password',
+                  // labelText: 'Password',
                   hintText: 'Create a strong password',
                   controller: controllers['password']!,
                   validator: CustomValidator.password,
@@ -98,7 +98,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  labelText: 'Confirm Password',
+                  // labelText: 'Confirm Password',
                   hintText: 'Enter your password again',
                   controller: controllers['confirmPassword']!,
                   validator:

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:okazyon_mobile/core/constants/app_colors.dart';
-import 'package:okazyon_mobile/core/constants/ui_constants.dart';
+import 'package:okazyon_mobile/core/constants/colors.dart';
+import 'package:okazyon_mobile/core/constants/sizes.dart';
 
 class PrimaryButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -20,9 +20,8 @@ class PrimaryButton extends StatelessWidget {
         backgroundColor: AppColors.primary,
         padding: const EdgeInsets.symmetric(vertical: 16),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(UiConstants.borderRadius),
+          borderRadius: BorderRadius.circular(AppSizes.borderRadiusL),
         ),
-        elevation: 2,
       ),
       child: Text(
         text,

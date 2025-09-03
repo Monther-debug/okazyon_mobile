@@ -64,7 +64,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Container(width: 40, height: 4, color: Colors.red),
                 SizedBox(height: AppSizes.screenHeight(context) * 0.1),
                 CustomTextField(
-                  labelText: 'Phone Number',
+                  // labelText: 'Phone Number',
                   hintText: 'Enter your phone number',
                   controller: controllers['phone']!,
                   validator: CustomValidator.phone,
@@ -72,7 +72,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  labelText: 'Password',
+                  // labelText: 'Password',
                   hintText: 'Enter your password',
                   controller: controllers['password']!,
                   validator: CustomValidator.password,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:okazyon_mobile/core/constants/app_colors.dart';
-import 'package:okazyon_mobile/core/constants/ui_constants.dart';
+import 'package:okazyon_mobile/core/constants/colors.dart';
+import 'package:okazyon_mobile/core/constants/sizes.dart';
 import 'package:okazyon_mobile/core/widgets/custom_text_field.dart';
 import 'package:okazyon_mobile/core/widgets/primary_button.dart';
 
@@ -22,8 +22,8 @@ class ForgotPasswordScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: UiConstants.defaultPadding),
+          padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.defaultPadding),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -60,7 +60,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 hintText: 'Enter your registered phone number',
                 prefixIcon: Icons.phone_outlined,
               ),
-              const SizedBox(height: UiConstants.formSpacing),
+              const SizedBox(height: AppSizes.formSpacing),
               PrimaryButton(
                 onPressed: () {
                 },

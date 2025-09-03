@@ -8,7 +8,6 @@ import '../../domain/usecases/register_usecase.dart';
 import '../../domain/usecases/logout_usecase.dart';
 import '../../domain/usecases/get_current_user_usecase.dart';
 
-// Data Sources
 final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
   return AuthRemoteDataSourceImpl();
 });
@@ -17,7 +16,6 @@ final authLocalDataSourceProvider = Provider<AuthLocalDataSource>((ref) {
   return AuthLocalDataSourceImpl();
 });
 
-// Repository
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepositoryImpl(
     remoteDataSource: ref.watch(authRemoteDataSourceProvider),
@@ -25,7 +23,6 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
   );
 });
 
-// Use Cases
 final loginUseCaseProvider = Provider<LoginUseCase>((ref) {
   return LoginUseCase(ref.watch(authRepositoryProvider));
 });

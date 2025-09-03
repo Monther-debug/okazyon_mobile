@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:okazyon_mobile/core/constants/app_colors.dart';
-import 'package:okazyon_mobile/core/constants/ui_constants.dart';
+import 'package:okazyon_mobile/core/constants/colors.dart';
+import 'package:okazyon_mobile/core/constants/sizes.dart';
 
 class CustomTextField extends StatelessWidget {
-  // Optional label rendered above the field. If null, no label is shown.
   final String? labelText;
-  // Hint text inside the field.
   final String hintText;
-  // Obscure input (e.g., for passwords)
   final bool obscureText;
-  // Leading icon inside the field
   final IconData? prefixIcon;
-  // Trailing icon inside the field
   final IconData? suffixIcon;
-  // Action when trailing icon pressed (if provided)
   final VoidCallback? onSuffixIconPressed;
-  // Keyboard type for the field
   final TextInputType keyboardType;
-  // Validator for form integration
   final FormFieldValidator<String>? validator;
-  // Optional controller
   final TextEditingController? controller;
 
   const CustomTextField({
@@ -62,12 +53,12 @@ class CustomTextField extends StatelessWidget {
                   )
                 : null,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(UiConstants.borderRadius),
-              borderSide: BorderSide(color: AppColors.grey.withOpacity(0.3,)),
+              borderRadius: BorderRadius.circular(AppSizes.borderRadius),
+              borderSide: BorderSide(color: Colors.grey.shade300),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(UiConstants.borderRadius),
-              borderSide: BorderSide(color: AppColors.grey.withOpacity(0.3)),
+              borderRadius: BorderRadius.circular(AppSizes.borderRadius),
+              borderSide: BorderSide(color: Colors.grey.shade300),
             ),
           ),
         ),
