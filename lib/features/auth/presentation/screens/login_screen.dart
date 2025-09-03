@@ -39,7 +39,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (next.isAuthenticated) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('Login successful!')));
+        ).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)!.loginSuccessful)),
+        );
       }
     });
 
@@ -65,16 +67,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Container(width: 40, height: 4, color: Colors.red),
                 SizedBox(height: AppSizes.screenHeight(context) * 0.1),
                 CustomTextField(
-                  labelText: 'Phone Number',
-                  hintText: 'Enter your phone number',
+                  labelText: AppLocalizations.of(context)!.phoneNumber,
+                  hintText: AppLocalizations.of(context)!.enterPhone,
                   controller: controllers['phone']!,
                   validator: CustomValidator.phone,
                   suffixIcon: Icons.phone_outlined,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  labelText: 'Password',
-                  hintText: 'Enter your password',
+                  labelText: AppLocalizations.of(context)!.password,
+                  hintText: AppLocalizations.of(context)!.enterPassword,
                   controller: controllers['password']!,
                   validator: CustomValidator.password,
                   obscureText: loginFormState.obscurePassword,
@@ -108,7 +110,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomButton(
-                  text: authState.isLoading ? 'Logging in...' : 'Login',
+                  text: authState.isLoading
+                      ? AppLocalizations.of(context)!.loggingIn
+                      : AppLocalizations.of(context)!.login,
                   onPressed:
                       authState.isLoading
                           ? () {}
@@ -124,10 +128,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           },
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
-                Row(
+        Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account?"),
+          Text(AppLocalizations.of(context)!.dontHaveAccount),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -137,15 +141,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
                         );
                       },
-                      child: const Text(
-                        'Sign Up',
-                        style: TextStyle(color: AppColors.primary),
+                      child: Text(
+                        AppLocalizations.of(context)!.signUp,
+                        style: const TextStyle(color: AppColors.primary),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
-                const Text('Or continue with'),
+                Text(AppLocalizations.of(context)!.orContinueWith),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 GoogleButton(
                   onPressed:

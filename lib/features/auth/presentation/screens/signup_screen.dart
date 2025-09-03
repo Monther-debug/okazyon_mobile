@@ -9,6 +9,7 @@ import 'package:okazyon_mobile/core/widgets/custom_text_field.dart';
 import 'package:okazyon_mobile/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:okazyon_mobile/features/auth/presentation/controllers/signup_controller.dart';
 import 'package:okazyon_mobile/features/auth/presentation/screens/login_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
@@ -38,7 +39,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       if (next.isAuthenticated) {
         // Navigate to home screen or show success message
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Account created successfully!')),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.accountCreatedSuccessfully),
+          ),
         );
       }
     });
@@ -53,36 +56,36 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: AppSizes.screenHeight(context) * 0.05),
-                const Text(
-                  'Create Your Account',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                Text(
+                  AppLocalizations.of(context)!.createYourAccount,
+                  style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Join Okazyon and discover amazing deals',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.joinOkazyonTagline,
+                  style: const TextStyle(
                     fontSize: 18,
                     color: AppColors.textSecondary,
                   ),
                 ),
                 SizedBox(height: AppSizes.screenHeight(context) * 0.05),
                 CustomTextField(
-                  labelText: 'Username',
-                  hintText: 'Choose a username',
+                  labelText: AppLocalizations.of(context)!.username,
+                  hintText: AppLocalizations.of(context)!.chooseUsername,
                   controller: controllers['username']!,
                   validator: CustomValidator.username,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  labelText: 'Phone Number',
-                  hintText: 'Enter your phone number',
+                  labelText: AppLocalizations.of(context)!.phoneNumber,
+                  hintText: AppLocalizations.of(context)!.enterPhone,
                   controller: controllers['phone']!,
                   validator: CustomValidator.phone,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  labelText: 'Password',
-                  hintText: 'Create a strong password',
+                  labelText: AppLocalizations.of(context)!.password,
+                  hintText: AppLocalizations.of(context)!.createStrongPassword,
                   controller: controllers['password']!,
                   validator: CustomValidator.password,
                   obscureText: signupFormState.obscurePassword,
@@ -98,8 +101,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  labelText: 'Confirm Password',
-                  hintText: 'Enter your password again',
+                  labelText: AppLocalizations.of(context)!.confirmPassword,
+                  hintText: AppLocalizations.of(context)!.enterPasswordAgain,
                   controller: controllers['confirmPassword']!,
                   validator:
                       (value) => CustomValidator.confirmPassword(
@@ -137,19 +140,19 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                             fontSize: 14,
                           ),
                           children: [
-                            const TextSpan(text: 'I agree to the '),
+                            TextSpan(text: AppLocalizations.of(context)!.iAgreeToThe),
                             TextSpan(
-                              text: 'Terms of Service',
+                              text: AppLocalizations.of(context)!.termsOfService,
                               style: const TextStyle(color: AppColors.primary),
                               recognizer: TapGestureRecognizer()..onTap = () {},
                             ),
-                            const TextSpan(text: ' and '),
+                            TextSpan(text: AppLocalizations.of(context)!.and),
                             TextSpan(
-                              text: 'Privacy Policy',
+                              text: AppLocalizations.of(context)!.privacyPolicy,
                               style: const TextStyle(color: AppColors.primary),
                               recognizer: TapGestureRecognizer()..onTap = () {},
                             ),
-                            const TextSpan(text: '.'),
+                            TextSpan(text: AppLocalizations.of(context)!.dot),
                           ],
                         ),
                       ),
@@ -158,7 +161,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomButton(
-                  text: authState.isLoading ? 'Creating Account...' : 'Sign up',
+                  text: authState.isLoading
+                      ? AppLocalizations.of(context)!.creatingAccount
+                      : AppLocalizations.of(context)!.signUpCta,
                   onPressed:
                       authState.isLoading
                           ? () {}
@@ -181,7 +186,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Already have an account?"),
+                    Text(AppLocalizations.of(context)!.alreadyHaveAccount),
                     TextButton(
                       onPressed: () {
                         Navigator.pushReplacement(
@@ -191,9 +196,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                           ),
                         );
                       },
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(color: AppColors.primary),
+                      child: Text(
+                        AppLocalizations.of(context)!.login,
+                        style: const TextStyle(color: AppColors.primary),
                       ),
                     ),
                   ],
