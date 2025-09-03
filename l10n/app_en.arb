@@ -1,0 +1,11 @@
+{
+  "appTitle": "Okazyon",
+  "forgotPassword": "Forgot Password?",
+  "resetPassword": "Reset Password",
+  "phoneNumber": "Phone Number",
+  "enterPhone": "Enter your registered phone number",
+  "sendResetCode": "Send Reset Code",
+  "backToLogin": "Back to Login",
+  "forgotHelp": "No worries! Enter your phone number below and we'll send you a code to reset it.",
+  "rememberPassword": "Remember your password?"
+}

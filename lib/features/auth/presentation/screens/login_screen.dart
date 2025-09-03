@@ -10,6 +10,7 @@ import 'package:okazyon_mobile/features/auth/presentation/controllers/auth_contr
 import 'package:okazyon_mobile/features/auth/presentation/controllers/login_controller.dart';
 import 'package:okazyon_mobile/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:okazyon_mobile/features/auth/presentation/screens/signup_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -56,15 +57,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: AppSizes.screenHeight(context) * 0.1),
-                const Text(
-                  'Okazyon',
-                  style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+                Text(
+                  AppLocalizations.of(context)!.appTitle,
+                  style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
                 Container(width: 40, height: 4, color: Colors.red),
                 SizedBox(height: AppSizes.screenHeight(context) * 0.1),
                 CustomTextField(
-                  // labelText: 'Phone Number',
+                  labelText: 'Phone Number',
                   hintText: 'Enter your phone number',
                   controller: controllers['phone']!,
                   validator: CustomValidator.phone,
@@ -72,7 +73,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  // labelText: 'Password',
+                  labelText: 'Password',
                   hintText: 'Enter your password',
                   controller: controllers['password']!,
                   validator: CustomValidator.password,
@@ -99,9 +100,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                       );
                     },
-                    child: const Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: AppColors.primary),
+                    child: Text(
+                      AppLocalizations.of(context)!.forgotPassword,
+                      style: const TextStyle(color: AppColors.primary),
                     ),
                   ),
                 ),
