@@ -1,11 +1,10 @@
 class AppConfig {
   static const String baseUrl =
-      'https://your-api-domain.com/api'; // Replace with your actual API URL
+      'https:/http://127.0.0.1:8000/api'; 
   static const Duration connectTimeout = Duration(seconds: 30);
   static const Duration receiveTimeout = Duration(seconds: 30);
   static const Duration sendTimeout = Duration(seconds: 30);
 
-  // API Endpoints
   static const String loginEndpoint = '/login';
   static const String registerEndpoint = '/register';
   static const String resetPasswordEndpoint = '/reset-password';

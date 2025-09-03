@@ -28,7 +28,6 @@ class DioClient {
       ),
     );
 
-    // Add interceptors
     _dio.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,
@@ -40,7 +39,6 @@ class DioClient {
       ),
     );
 
-    // Add auth interceptor
     _dio.interceptors.add(AuthInterceptor());
 
     _initialized = true;
@@ -70,7 +68,6 @@ class AuthInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {
-      // Token expired, clear stored token
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('auth_token');
       await prefs.remove('user_data');

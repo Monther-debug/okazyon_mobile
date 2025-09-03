@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// Auth State
 class AuthState {
   final bool isLoading;
   final String? error;
@@ -21,7 +20,6 @@ class AuthState {
   }
 }
 
-// Auth Controller
 class AuthController extends StateNotifier<AuthState> {
   AuthController() : super(const AuthState());
 
@@ -31,12 +29,10 @@ class AuthController extends StateNotifier<AuthState> {
     try {
       await Future.delayed(const Duration(seconds: 2));
 
-      // Mock validation
       if (phone.isEmpty || password.isEmpty) {
         throw Exception('Phone and password are required');
       }
 
-      // Mock successful login
       state = state.copyWith(isLoading: false, isAuthenticated: true);
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
@@ -53,10 +49,8 @@ class AuthController extends StateNotifier<AuthState> {
     state = state.copyWith(isLoading: true, error: null);
 
     try {
-      // Simulate API call
       await Future.delayed(const Duration(seconds: 2));
 
-      // Mock validation
       if (username.isEmpty || phone.isEmpty || password.isEmpty) {
         throw Exception('All fields are required');
       }
@@ -69,7 +63,6 @@ class AuthController extends StateNotifier<AuthState> {
         throw Exception('Please agree to the terms and conditions');
       }
 
-      // Mock successful signup
       state = state.copyWith(isLoading: false, isAuthenticated: true);
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
@@ -80,7 +73,6 @@ class AuthController extends StateNotifier<AuthState> {
     state = state.copyWith(isLoading: true, error: null);
 
     try {
-      // Simulate Google login
       await Future.delayed(const Duration(seconds: 1));
 
       state = state.copyWith(isLoading: false, isAuthenticated: true);
@@ -98,7 +90,6 @@ class AuthController extends StateNotifier<AuthState> {
   }
 }
 
-// Providers
 final authControllerProvider = StateNotifierProvider<AuthController, AuthState>(
   (ref) => AuthController(),
 );

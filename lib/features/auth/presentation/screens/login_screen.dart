@@ -8,6 +8,7 @@ import 'package:okazyon_mobile/core/widgets/custom_text_field.dart';
 import 'package:okazyon_mobile/core/widgets/google_button.dart';
 import 'package:okazyon_mobile/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:okazyon_mobile/features/auth/presentation/controllers/login_controller.dart';
+import 'package:okazyon_mobile/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:okazyon_mobile/features/auth/presentation/screens/signup_screen.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -90,7 +91,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordScreen(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       'Forgot Password?',
                       style: TextStyle(color: AppColors.primary),

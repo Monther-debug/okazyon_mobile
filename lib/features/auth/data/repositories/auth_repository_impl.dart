@@ -22,7 +22,6 @@ class AuthRepositoryImpl implements AuthRepository {
       password: password,
     );
 
-    // Cache the token and user data
     await localDataSource.cacheAuthToken(response.token.accessToken);
     await localDataSource.cacheUserData(response.user);
 
@@ -47,7 +46,6 @@ class AuthRepositoryImpl implements AuthRepository {
       phone: phone,
     );
 
-    // Cache the token and user data
     await localDataSource.cacheAuthToken(response.token.accessToken);
     await localDataSource.cacheUserData(response.user);
 
@@ -92,7 +90,6 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<User> getProfile() async {
     final userModel = await remoteDataSource.getProfile();
 
-    // Update cached user data
     await localDataSource.cacheUserData(userModel);
 
     return userModel.toEntity();
@@ -112,7 +109,6 @@ class AuthRepositoryImpl implements AuthRepository {
       phone: phone,
     );
 
-    // Update cached user data
     await localDataSource.cacheUserData(userModel);
 
     return userModel.toEntity();

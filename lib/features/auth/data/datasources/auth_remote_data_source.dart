@@ -114,12 +114,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       await _dio.post(AppConfig.logoutEndpoint);
 
-      // Clear local storage
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('auth_token');
       await prefs.remove('user_data');
     } on DioException catch (e) {
-      // Even if the API call fails, clear local storage
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('auth_token');
       await prefs.remove('user_data');
@@ -294,7 +292,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         final data = e.response?.data;
 
         if (statusCode == 422 && data is Map<String, dynamic>) {
-          // Validation errors
           final errors = data['errors'] as Map<String, dynamic>?;
           if (errors != null) {
             final formattedErrors = <String, List<String>>{};

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// Signup Form State
 class SignupFormState {
   final String username;
   final String phone;
@@ -43,7 +42,6 @@ class SignupFormState {
   }
 }
 
-// Signup Form Controller
 class SignupFormController extends StateNotifier<SignupFormState> {
   SignupFormController() : super(const SignupFormState());
 

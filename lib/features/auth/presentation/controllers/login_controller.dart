@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// Login Form State
 class LoginFormState {
   final String phone;
   final String password;
@@ -26,7 +25,6 @@ class LoginFormState {
   }
 }
 
-// Login Form Controller
 class LoginFormController extends StateNotifier<LoginFormState> {
   LoginFormController() : super(const LoginFormState());
 
@@ -53,13 +51,11 @@ class LoginFormController extends StateNotifier<LoginFormState> {
   }
 }
 
-// Login Form Provider
 final loginFormControllerProvider =
     StateNotifierProvider<LoginFormController, LoginFormState>(
       (ref) => LoginFormController(),
     );
 
-// Text Controllers Provider
 final loginTextControllersProvider = Provider((ref) {
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
