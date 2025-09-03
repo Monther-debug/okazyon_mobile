@@ -63,11 +63,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Container(width: 40, height: 4, color: Colors.red),
                 SizedBox(height: AppSizes.screenHeight(context) * 0.1),
                 CustomTextField(
-                  labelText: 'Email',
-                  hintText: 'Enter your email',
-                  controller: controllers['email']!,
-                  validator: CustomValidator.email,
-                  suffixIcon: Icons.email_outlined,
+                  labelText: 'Phone Number',
+                  hintText: 'Enter your phone number',
+                  controller: controllers['phone']!,
+                  validator: CustomValidator.phone,
+                  suffixIcon: Icons.phone_outlined,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
@@ -108,7 +108,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               await ref
                                   .read(authControllerProvider.notifier)
                                   .login(
-                                    controllers['email']!.text,
+                                    controllers['phone']!.text,
                                     controllers['password']!.text,
                                   );
                             }

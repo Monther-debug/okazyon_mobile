@@ -35,4 +35,17 @@ class CustomValidator {
     }
     return null;
   }
+
+  static String? phone(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your phone number';
+    }
+    // Remove any non-digit characters for validation
+    String phoneNumber = value.replaceAll(RegExp(r'[^\d]'), '');
+
+    if (phoneNumber.length < 10) {
+      return 'Please enter a valid phone number';
+    }
+    return null;
+  }
 }

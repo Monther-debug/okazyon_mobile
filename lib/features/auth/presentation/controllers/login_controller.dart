@@ -3,23 +3,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Login Form State
 class LoginFormState {
-  final String email;
+  final String phone;
   final String password;
   final bool obscurePassword;
 
   const LoginFormState({
-    this.email = '',
+    this.phone = '',
     this.password = '',
     this.obscurePassword = true,
   });
 
   LoginFormState copyWith({
-    String? email,
+    String? phone,
     String? password,
     bool? obscurePassword,
   }) {
     return LoginFormState(
-      email: email ?? this.email,
+      phone: phone ?? this.phone,
       password: password ?? this.password,
       obscurePassword: obscurePassword ?? this.obscurePassword,
     );
@@ -30,8 +30,8 @@ class LoginFormState {
 class LoginFormController extends StateNotifier<LoginFormState> {
   LoginFormController() : super(const LoginFormState());
 
-  void updateEmail(String email) {
-    state = state.copyWith(email: email);
+  void updatePhone(String phone) {
+    state = state.copyWith(phone: phone);
   }
 
   void updatePassword(String password) {
@@ -47,7 +47,7 @@ class LoginFormController extends StateNotifier<LoginFormState> {
   }
 
   bool isFormValid() {
-    return state.email.isNotEmpty &&
+    return state.phone.isNotEmpty &&
         state.password.isNotEmpty &&
         state.password.length >= 6;
   }
@@ -61,13 +61,13 @@ final loginFormControllerProvider =
 
 // Text Controllers Provider
 final loginTextControllersProvider = Provider((ref) {
-  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
   final passwordController = TextEditingController();
 
   ref.onDispose(() {
-    emailController.dispose();
+    phoneController.dispose();
     passwordController.dispose();
   });
 
-  return {'email': emailController, 'password': passwordController};
+  return {'phone': phoneController, 'password': passwordController};
 });

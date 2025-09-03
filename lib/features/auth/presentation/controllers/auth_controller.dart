@@ -25,15 +25,15 @@ class AuthState {
 class AuthController extends StateNotifier<AuthState> {
   AuthController() : super(const AuthState());
 
-  Future<void> login(String email, String password) async {
+  Future<void> login(String phone, String password) async {
     state = state.copyWith(isLoading: true, error: null);
 
     try {
       await Future.delayed(const Duration(seconds: 2));
 
       // Mock validation
-      if (email.isEmpty || password.isEmpty) {
-        throw Exception('Email and password are required');
+      if (phone.isEmpty || password.isEmpty) {
+        throw Exception('Phone and password are required');
       }
 
       // Mock successful login
@@ -45,7 +45,7 @@ class AuthController extends StateNotifier<AuthState> {
 
   Future<void> signup({
     required String username,
-    required String email,
+    required String phone,
     required String password,
     required String confirmPassword,
     required bool agreeToTerms,
@@ -57,7 +57,7 @@ class AuthController extends StateNotifier<AuthState> {
       await Future.delayed(const Duration(seconds: 2));
 
       // Mock validation
-      if (username.isEmpty || email.isEmpty || password.isEmpty) {
+      if (username.isEmpty || phone.isEmpty || password.isEmpty) {
         throw Exception('All fields are required');
       }
 

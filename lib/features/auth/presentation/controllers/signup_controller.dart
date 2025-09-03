@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Signup Form State
 class SignupFormState {
   final String username;
-  final String email;
+  final String phone;
   final String password;
   final String confirmPassword;
   final bool obscurePassword;
@@ -13,7 +13,7 @@ class SignupFormState {
 
   const SignupFormState({
     this.username = '',
-    this.email = '',
+    this.phone = '',
     this.password = '',
     this.confirmPassword = '',
     this.obscurePassword = true,
@@ -23,7 +23,7 @@ class SignupFormState {
 
   SignupFormState copyWith({
     String? username,
-    String? email,
+    String? phone,
     String? password,
     String? confirmPassword,
     bool? obscurePassword,
@@ -32,7 +32,7 @@ class SignupFormState {
   }) {
     return SignupFormState(
       username: username ?? this.username,
-      email: email ?? this.email,
+      phone: phone ?? this.phone,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
       obscurePassword: obscurePassword ?? this.obscurePassword,
@@ -51,8 +51,8 @@ class SignupFormController extends StateNotifier<SignupFormState> {
     state = state.copyWith(username: username);
   }
 
-  void updateEmail(String email) {
-    state = state.copyWith(email: email);
+  void updatePhone(String phone) {
+    state = state.copyWith(phone: phone);
   }
 
   void updatePassword(String password) {
@@ -83,7 +83,7 @@ class SignupFormController extends StateNotifier<SignupFormState> {
 
   bool isFormValid() {
     return state.username.isNotEmpty &&
-        state.email.isNotEmpty &&
+        state.phone.isNotEmpty &&
         state.password.isNotEmpty &&
         state.confirmPassword.isNotEmpty &&
         state.password == state.confirmPassword &&
@@ -101,20 +101,20 @@ final signupFormControllerProvider =
 // Text Controllers Provider
 final signupTextControllersProvider = Provider((ref) {
   final usernameController = TextEditingController();
-  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
   ref.onDispose(() {
     usernameController.dispose();
-    emailController.dispose();
+    phoneController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
   });
 
   return {
     'username': usernameController,
-    'email': emailController,
+    'phone': phoneController,
     'password': passwordController,
     'confirmPassword': confirmPasswordController,
   };

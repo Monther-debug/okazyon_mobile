@@ -74,10 +74,10 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  labelText: 'Email Address',
-                  hintText: 'you@example.com',
-                  controller: controllers['email']!,
-                  validator: CustomValidator.email,
+                  labelText: 'Phone Number',
+                  hintText: 'Enter your phone number',
+                  controller: controllers['phone']!,
+                  validator: CustomValidator.phone,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
@@ -168,7 +168,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                   .read(authControllerProvider.notifier)
                                   .signup(
                                     username: controllers['username']!.text,
-                                    email: controllers['email']!.text,
+                                    phone: controllers['phone']!.text,
                                     password: controllers['password']!.text,
                                     confirmPassword:
                                         controllers['confirmPassword']!.text,
