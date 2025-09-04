@@ -1,5 +1,5 @@
-import '../../domain/entities/user.dart';
 import '../../domain/entities/auth_response.dart';
+import '../../domain/entities/user.dart';
 
 class UserModel {
   final String id;

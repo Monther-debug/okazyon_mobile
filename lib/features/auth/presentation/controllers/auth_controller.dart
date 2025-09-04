@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../domain/usecases/login_usecase.dart';
-import '../../domain/usecases/register_usecase.dart';
 import '../../domain/usecases/logout_usecase.dart';
+import '../../domain/usecases/register_usecase.dart';
 import '../providers/auth_providers.dart';
 
 /// Authentication State

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:okazyon_mobile/core/constants/colors.dart';
@@ -11,7 +12,6 @@ import 'package:okazyon_mobile/features/auth/presentation/controllers/auth_contr
 import 'package:okazyon_mobile/features/auth/presentation/controllers/login_controller.dart';
 import 'package:okazyon_mobile/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:okazyon_mobile/features/auth/presentation/screens/signup_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});

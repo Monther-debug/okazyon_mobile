@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:okazyon_mobile/core/constants/colors.dart';
 import 'package:okazyon_mobile/core/constants/sizes.dart';
 import 'package:okazyon_mobile/core/widgets/custom_text_field.dart';
 import 'package:okazyon_mobile/core/widgets/primary_button.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:okazyon_mobile/features/auth/presentation/screens/otp_screen.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {

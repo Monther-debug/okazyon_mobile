@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:okazyon_mobile/core/providers/theme_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:okazyon_mobile/core/providers/locale_provider.dart';
+import 'package:okazyon_mobile/core/providers/theme_provider.dart';
 import 'package:okazyon_mobile/core/theme/theme.dart' as app_theme;
 import 'package:okazyon_mobile/features/auth/presentation/screens/login_screen.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});

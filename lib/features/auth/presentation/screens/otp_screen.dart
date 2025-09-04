@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:okazyon_mobile/core/constants/colors.dart';
 import 'package:okazyon_mobile/core/constants/sizes.dart';
 import 'package:okazyon_mobile/core/widgets/custom_button.dart';
 import 'package:okazyon_mobile/features/auth/presentation/controllers/otp_controller.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpScreen extends ConsumerWidget {

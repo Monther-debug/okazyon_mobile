@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../core/network/dio_client.dart';
+
 import '../../../../core/network/app_config.dart';
+import '../../../../core/network/dio_client.dart';
 import '../../../../core/network/exceptions.dart';
 import '../models/user_model.dart';
 
