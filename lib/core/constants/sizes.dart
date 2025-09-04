@@ -9,8 +9,8 @@ class AppSizes {
   static const double pagePadding = 28.0;
   static const double widgetSpacing = 16.0;
   static const double borderRadius = 8.0;
-    static const double borderRadiusL = 12.0;
+  static const double borderRadiusL = 12.0;
   static const double formSpacing = 30.0;
-    static const double defaultPadding = 16.0;
-
+  static const double defaultPadding = 16.0;
+  static const double spaceBtwSections = 32.0;
 }
