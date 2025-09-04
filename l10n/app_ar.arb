@@ -31,5 +31,18 @@
   "termsOfService": "شروط الخدمة",
   "and": " و",
   "privacyPolicy": "سياسة الخصوصية",
-  "dot": "."
+  "dot": ".",
+  "pleaseEnterEmail": "يرجى إدخال بريدك الإلكتروني",
+  "pleaseEnterValidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+  "pleaseEnterPassword": "يرجى إدخال كلمة المرور",
+  "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+  "pleaseEnterUsername": "يرجى إدخال اسم المستخدم",
+  "pleaseConfirmPassword": "يرجى تأكيد كلمة المرور",
+  "passwordsDoNotMatch": "كلمات المرور غير متطابقة",
+  "pleaseEnterPhone": "يرجى إدخال رقم هاتفك",
+  "pleaseEnterValidPhone": "يرجى إدخال رقم هاتف صحيح",
+  "invalidOtpCode": "رمز التحقق غير صحيح",
+  "loginError": "فشل تسجيل الدخول. يرجى التحقق من بياناتك.",
+  "signupError": "فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.",
+  "networkError": "خطأ في الشبكة. يرجى التحقق من اتصالك."
 }
