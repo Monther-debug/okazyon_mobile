@@ -1,4 +1,3 @@
-import '../entities/user.dart';
 import '../entities/auth_response.dart';
 import '../repositories/auth_repository.dart';
 

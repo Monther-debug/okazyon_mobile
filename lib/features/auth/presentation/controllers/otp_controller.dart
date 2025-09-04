@@ -54,19 +54,15 @@ class OtpController extends StateNotifier<OtpState> {
 
   Future<void> verifyOtp(String otp) async {
     state = state.copyWith(isLoading: true, clearError: true);
-    // TODO: Call the verify OTP use case from AuthController
     await Future.delayed(const Duration(seconds: 2));
-    // Mock logic
     if (otp == '123456') {
       state = state.copyWith(isLoading: false);
-      // Navigate to success or home
     } else {
       state = state.copyWith(isLoading: false, error: 'Invalid OTP code');
     }
   }
 
   Future<void> resendOtp(String phone) async {
-    // TODO: Call the resend OTP use case from AuthController
     startTimer();
   }
 
