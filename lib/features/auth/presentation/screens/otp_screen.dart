@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:okazyon_mobile/core/constants/colors.dart';
 import 'package:okazyon_mobile/core/constants/sizes.dart';
 import 'package:okazyon_mobile/core/widgets/custom_button.dart';
@@ -90,11 +91,13 @@ class OtpScreen extends ConsumerWidget {
                 },
                 pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                 showCursor: true,
-                onCompleted: (pin) => otpController.verifyOtp(pin),
+                onCompleted: (pin) => otpController.verifyOtp(pin, context),
               ),
               const SizedBox(height: AppSizes.spaceBtwSections),
               CustomButton(
-                text: otpState.isLoading ? 'Verifying...' : 'Verify',
+                text: otpState.isLoading 
+                    ? AppLocalizations.of(context)!.verifying 
+                    : AppLocalizations.of(context)!.verify,
                 onPressed:
                     otpState.isLoading
                         ? null
@@ -105,14 +108,14 @@ class OtpScreen extends ConsumerWidget {
               const SizedBox(height: AppSizes.widgetSpacing),
               otpState.isTimerActive
                   ? Text(
-                    'Resend Code in ${otpState.timerValue}s',
+                    AppLocalizations.of(context)!.resendCodeIn(otpState.timerValue),
                     style: const TextStyle(color: AppColors.textSecondary),
                   )
                   : TextButton(
                     onPressed: () => otpController.resendOtp(phone),
-                    child: const Text(
-                      'Resend Code',
-                      style: TextStyle(color: AppColors.primary),
+                    child: Text(
+                      AppLocalizations.of(context)!.resendCode,
+                      style: const TextStyle(color: AppColors.primary),
                     ),
                   ),
             ],

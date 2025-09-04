@@ -27,9 +27,9 @@ abstract class AuthRepository {
 
   Future<bool> verifyOtp({required String phone, required String otp});
 
-  Future<User> getProfile();
+  Future<AppUser> getProfile();
 
-  Future<User> updateProfile({
+  Future<AppUser> updateProfile({
     String? username,
     String? firstName,
     String? lastName,
@@ -39,6 +39,6 @@ abstract class AuthRepository {
   Future<void> registerFcmToken({required String token});
 
   Future<bool> isLoggedIn();
-  Future<User?> getCurrentUser();
+  Future<AppUser?> getCurrentUser();
   Future<String?> getAuthToken();
 }

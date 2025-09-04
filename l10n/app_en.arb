@@ -44,5 +44,9 @@
   "invalidOtpCode": "Invalid OTP code",
   "loginError": "Login failed. Please check your credentials.",
   "signupError": "Signup failed. Please try again.",
-  "networkError": "Network error. Please check your connection."
+  "networkError": "Network error. Please check your connection.",
+  "verifying": "Verifying...",
+  "verify": "Verify",
+  "resendCodeIn": "Resend Code in {seconds}s",
+  "resendCode": "Resend Code"
 }

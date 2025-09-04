@@ -89,7 +89,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<User> getProfile() async {
+  Future<AppUser> getProfile() async {
     final userModel = await remoteDataSource.getProfile();
 
     await localDataSource.cacheUserData(userModel);
@@ -98,7 +98,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<User> updateProfile({
+  Future<AppUser> updateProfile({
     String? username,
     String? firstName,
     String? lastName,
@@ -127,7 +127,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<User?> getCurrentUser() async {
+  Future<AppUser?> getCurrentUser() async {
     final userModel = await localDataSource.getCachedUserData();
     return userModel?.toEntity();
   }

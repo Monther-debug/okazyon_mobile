@@ -84,7 +84,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       AppLocalizations.of(context)?.chooseUsername ??
                       'Choose a username',
                   controller: controllers['username']!,
-                  validator: CustomValidator.username,
+                  validator: (value) => CustomValidator.username(value, context),
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
@@ -95,7 +95,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       AppLocalizations.of(context)?.enterPhone ??
                       'Enter phone number',
                   controller: controllers['phone']!,
-                  validator: CustomValidator.phone,
+                  validator: (value) => CustomValidator.phone(value, context),
                   keyboardType: TextInputType.phone,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
@@ -107,7 +107,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       AppLocalizations.of(context)?.createStrongPassword ??
                       'Create a strong password',
                   controller: controllers['password']!,
-                  validator: CustomValidator.password,
+                  validator: (value) => CustomValidator.password(value, context),
                   obscureText: signupFormState.obscurePassword,
                   prefixIcon:
                       signupFormState.obscurePassword
@@ -133,6 +133,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       (value) => CustomValidator.confirmPassword(
                         value,
                         controllers['password']!.text,
+                        context,
                       ),
                   obscureText: signupFormState.obscureConfirmPassword,
                   prefixIcon:

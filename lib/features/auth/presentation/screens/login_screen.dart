@@ -82,7 +82,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   hintText:
                       AppLocalizations.of(context)?.enterPhone ?? 'Enter phone',
                   controller: controllers['phone']!,
-                  validator: CustomValidator.phone,
+                  validator: (value) => CustomValidator.phone(value, context),
                   suffixIcon: Iconsax.mobile,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
@@ -93,7 +93,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       AppLocalizations.of(context)?.enterPassword ??
                       'Enter password',
                   controller: controllers['password']!,
-                  validator: CustomValidator.password,
+                  validator: (value) => CustomValidator.password(value, context),
                   suffixIcon: Iconsax.lock,
                   obscureText: loginFormState.obscurePassword,
                   prefixIcon:

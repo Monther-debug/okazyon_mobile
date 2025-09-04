@@ -55,8 +55,8 @@ class UserModel {
     };
   }
 
-  User toEntity() {
-    return User(
+  AppUser toEntity() {
+    return AppUser(
       id: id,
       email: email,
       username: username,
