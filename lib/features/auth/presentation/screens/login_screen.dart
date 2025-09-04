@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:okazyon_mobile/core/constants/colors.dart';
 import 'package:okazyon_mobile/core/constants/sizes.dart';
 import 'package:okazyon_mobile/core/utils/validators.dart';
@@ -29,19 +30,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final controllers = ref.watch(loginTextControllersProvider);
 
     ref.listen<AuthState>(authControllerProvider, (previous, next) {
-      if (next.error != null) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(next.error!)));
+      if (next.error != null && next.error != previous?.error) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(SnackBar(content: Text(next.error!)));
         ref.read(authControllerProvider.notifier).clearError();
       }
 
-      if (next.isAuthenticated) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.loginSuccessful)),
-        );
+      if (next.isAuthenticated && !(previous?.isAuthenticated ?? false)) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text(
+                AppLocalizations.of(context)?.loginSuccessful ??
+                    'Login Successful',
+              ),
+              backgroundColor: Colors.green,
+            ),
+          );
       }
     });
 
@@ -60,27 +67,36 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               children: [
                 SizedBox(height: AppSizes.screenHeight(context) * 0.1),
                 Text(
-                  AppLocalizations.of(context)!.appTitle,
-                  style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)?.appTitle ?? 'Okazyon',
+                  style: const TextStyle(
+                    fontSize: 34,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Container(width: 40, height: 4, color: Colors.red),
                 SizedBox(height: AppSizes.screenHeight(context) * 0.1),
                 CustomTextField(
-                  labelText: AppLocalizations.of(context)!.phoneNumber,
-                  hintText: AppLocalizations.of(context)!.enterPhone,
+                  labelText:
+                      AppLocalizations.of(context)?.phoneNumber ?? 'Phone',
+                  hintText:
+                      AppLocalizations.of(context)?.enterPhone ?? 'Enter phone',
                   controller: controllers['phone']!,
                   validator: CustomValidator.phone,
-                  suffixIcon: Icons.phone_outlined,
+                  suffixIcon: Iconsax.mobile,
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomTextField(
-                  labelText: AppLocalizations.of(context)!.password,
-                  hintText: AppLocalizations.of(context)!.enterPassword,
+                  labelText:
+                      AppLocalizations.of(context)?.password ?? 'Password',
+                  hintText:
+                      AppLocalizations.of(context)?.enterPassword ??
+                      'Enter password',
                   controller: controllers['password']!,
                   validator: CustomValidator.password,
+                  suffixIcon: Iconsax.lock,
                   obscureText: loginFormState.obscurePassword,
-                  suffixIcon:
+                  prefixIcon:
                       loginFormState.obscurePassword
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined,
@@ -94,69 +110,85 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ForgotPasswordScreen(),
-                        ),
-                      );
-                    },
+                    onPressed:
+                        authState.isLoading
+                            ? null
+                            : () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => const ForgotPasswordScreen(),
+                                ),
+                              );
+                            },
                     child: Text(
-                      AppLocalizations.of(context)!.forgotPassword,
+                      AppLocalizations.of(context)?.forgotPassword ??
+                          'Forgot Password?',
                       style: const TextStyle(color: AppColors.primary),
                     ),
                   ),
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 CustomButton(
-                  text: authState.isLoading
-                      ? AppLocalizations.of(context)!.loggingIn
-                      : AppLocalizations.of(context)!.login,
+                  text:
+                      authState.isLoading
+                          ? AppLocalizations.of(context)?.loggingIn ??
+                              'Logging In...'
+                          : AppLocalizations.of(context)?.login ?? 'Login',
                   onPressed:
                       authState.isLoading
-                          ? () {}
-                          : () async {
-                            if (formKey.currentState!.validate()) {
-                              await ref
+                          ? null
+                          : () {
+                            if (formKey.currentState?.validate() ?? false) {
+                              ref
                                   .read(authControllerProvider.notifier)
                                   .login(
-                                    controllers['phone']!.text,
-                                    controllers['password']!.text,
+                                    phone: controllers['phone']!.text,
+                                    password: controllers['password']!.text,
                                   );
                             }
                           },
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
-        Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-          Text(AppLocalizations.of(context)!.dontHaveAccount),
+                    Text(
+                      AppLocalizations.of(context)?.dontHaveAccount ??
+                          "Don't have an account?",
+                    ),
                     TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignupScreen(),
-                          ),
-                        );
-                      },
+                      onPressed:
+                          authState.isLoading
+                              ? null
+                              : () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SignupScreen(),
+                                  ),
+                                );
+                              },
                       child: Text(
-                        AppLocalizations.of(context)!.signUp,
+                        AppLocalizations.of(context)?.signUp ?? 'Sign Up',
                         style: const TextStyle(color: AppColors.primary),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: AppSizes.widgetSpacing),
-                Text(AppLocalizations.of(context)!.orContinueWith),
+                Text(
+                  AppLocalizations.of(context)?.orContinueWith ??
+                      'Or continue with',
+                ),
                 const SizedBox(height: AppSizes.widgetSpacing),
                 GoogleButton(
                   onPressed:
                       authState.isLoading
-                          ? () {}
-                          : () async {
-                            await ref
+                          ? null
+                          : () {
+                            ref
                                 .read(authControllerProvider.notifier)
                                 .loginWithGoogle();
                           },

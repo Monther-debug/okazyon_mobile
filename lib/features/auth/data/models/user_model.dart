@@ -1,4 +1,5 @@
-import '../../domain/entities/user.dart' as entities;
+import '../../domain/entities/user.dart';
+import '../../domain/entities/auth_response.dart';
 
 class UserModel {
   final String id;
@@ -54,8 +55,8 @@ class UserModel {
     };
   }
 
-  entities.User toEntity() {
-    return entities.User(
+  User toEntity() {
+    return User(
       id: id,
       email: email,
       username: username,
@@ -69,49 +70,24 @@ class UserModel {
   }
 }
 
-class AuthTokenModel {
-  final String accessToken;
-  final String tokenType;
-
-  const AuthTokenModel({required this.accessToken, required this.tokenType});
-
-  factory AuthTokenModel.fromJson(Map<String, dynamic> json) {
-    return AuthTokenModel(
-      accessToken: json['access_token'] as String,
-      tokenType: json['token_type'] as String? ?? 'Bearer',
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'access_token': accessToken, 'token_type': tokenType};
-  }
-
-  entities.AuthToken toEntity() {
-    return entities.AuthToken(accessToken: accessToken, tokenType: tokenType);
-  }
-}
-
 class AuthResponseModel {
   final UserModel user;
-  final AuthTokenModel token;
+  final String token;
 
   const AuthResponseModel({required this.user, required this.token});
 
   factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
     return AuthResponseModel(
       user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
-      token: AuthTokenModel.fromJson(json['token'] as Map<String, dynamic>),
+      token: json['access_token'] as String,
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'user': user.toJson(), 'token': token.toJson()};
+    return {'user': user.toJson(), 'access_token': token};
   }
 
-  entities.AuthResponse toEntity() {
-    return entities.AuthResponse(
-      user: user.toEntity(),
-      token: token.toEntity(),
-    );
+  AuthResponse toEntity() {
+    return AuthResponse(user: user.toEntity(), token: token);
   }
 }

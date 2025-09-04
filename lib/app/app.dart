@@ -19,8 +19,8 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppLocalizations.of(context)?.appTitle ?? 'Okazyon',
-  theme: app_theme.AppTheme.lightTheme,
-  darkTheme: app_theme.AppTheme.darkTheme,
+      theme: app_theme.AppTheme.lightTheme,
+      darkTheme: app_theme.AppTheme.darkTheme,
       themeMode: themeMode,
       locale: locale,
       supportedLocales: const [Locale('en'), Locale('ar')],
@@ -33,11 +33,18 @@ class MyApp extends ConsumerWidget {
       // Use Poppins for LTR and Almarai for RTL
       builder: (context, child) {
         final isRTL = Directionality.of(context) == TextDirection.rtl;
-        final baseTheme = isRTL ? Theme.of(context).copyWith(
-          textTheme: GoogleFonts.almaraiTextTheme(Theme.of(context).textTheme),
-        ) : Theme.of(context).copyWith(
-          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
-        );
+        final baseTheme =
+            isRTL
+                ? Theme.of(context).copyWith(
+                  textTheme: GoogleFonts.almaraiTextTheme(
+                    Theme.of(context).textTheme,
+                  ),
+                )
+                : Theme.of(context).copyWith(
+                  textTheme: GoogleFonts.poppinsTextTheme(
+                    Theme.of(context).textTheme,
+                  ),
+                );
         return Theme(data: baseTheme, child: child!);
       },
       home: const LoginScreen(),

@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:okazyon_mobile/core/constants/colors.dart';
 
 class GoogleButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const GoogleButton({super.key, required this.onPressed});
 

@@ -1,4 +1,5 @@
 import '../../domain/entities/user.dart';
+import '../../domain/entities/auth_response.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_remote_data_source.dart';
 import '../datasources/auth_local_data_source.dart';
@@ -22,7 +23,7 @@ class AuthRepositoryImpl implements AuthRepository {
       password: password,
     );
 
-    await localDataSource.cacheAuthToken(response.token.accessToken);
+    await localDataSource.cacheAuthToken(response.token);
     await localDataSource.cacheUserData(response.user);
 
     return response.toEntity();
@@ -46,7 +47,7 @@ class AuthRepositoryImpl implements AuthRepository {
       phone: phone,
     );
 
-    await localDataSource.cacheAuthToken(response.token.accessToken);
+    await localDataSource.cacheAuthToken(response.token);
     await localDataSource.cacheUserData(response.user);
 
     return response.toEntity();
@@ -76,6 +77,7 @@ class AuthRepositoryImpl implements AuthRepository {
     );
   }
 
+  @override
   @override
   Future<void> sendOtp({required String phone}) async {
     await remoteDataSource.sendOtp(phone: phone);

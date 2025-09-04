@@ -43,11 +43,9 @@ class AppTheme {
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primary,
         secondary: AppColors.primary,
-        background: Color(0xFF121212),
-        surface: Color(0xFF1E1E1E),
+        surface: Color(0xFF121212),
         onPrimary: Colors.white,
         onSecondary: Colors.white,
-        onBackground: Colors.white,
         onSurface: Colors.white,
         error: Colors.redAccent,
         onError: Colors.white,
@@ -64,9 +62,7 @@ class AppTheme {
         ),
       ),
       textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: AppColors.primary,
-        ),
+        style: TextButton.styleFrom(foregroundColor: AppColors.primary),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,

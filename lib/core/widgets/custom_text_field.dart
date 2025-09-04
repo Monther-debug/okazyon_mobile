@@ -34,7 +34,10 @@ class CustomTextField extends StatelessWidget {
         if (labelText != null && labelText!.isNotEmpty) ...[
           Text(
             labelText!,
-            style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: AppColors.black,
+            ),
           ),
           const SizedBox(height: 8),
         ],
@@ -46,12 +49,13 @@ class CustomTextField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
-            suffixIcon: suffixIcon != null
-                ? IconButton(
-                    icon: Icon(suffixIcon),
-                    onPressed: onSuffixIconPressed,
-                  )
-                : null,
+            suffixIcon:
+                suffixIcon != null
+                    ? IconButton(
+                      icon: Icon(suffixIcon),
+                      onPressed: onSuffixIconPressed,
+                    )
+                    : null,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppSizes.borderRadius),
               borderSide: BorderSide(color: Colors.grey.shade300),
