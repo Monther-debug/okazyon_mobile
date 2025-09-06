@@ -7,6 +7,8 @@ import 'package:okazyon_mobile/core/providers/locale_provider.dart';
 import 'package:okazyon_mobile/core/providers/theme_provider.dart';
 import 'package:okazyon_mobile/core/theme/theme.dart' as app_theme;
 import 'package:okazyon_mobile/features/auth/presentation/screens/login_screen.dart';
+import 'package:okazyon_mobile/features/home/presentation/screens/home_screen.dart';
+import 'package:okazyon_mobile/features/main_nav/presentation/screens/main_nav_screen.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
@@ -47,7 +49,7 @@ class MyApp extends ConsumerWidget {
                 );
         return Theme(data: baseTheme, child: child!);
       },
-      home: const LoginScreen(),
+      home: const MainNavScreen(),
     );
   }
 }

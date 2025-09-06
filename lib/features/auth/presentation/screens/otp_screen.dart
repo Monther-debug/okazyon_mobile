@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:okazyon_mobile/core/constants/colors.dart';
+import 'package:okazyon_mobile/core/constants/image_strings.dart';
 import 'package:okazyon_mobile/core/constants/sizes.dart';
 import 'package:okazyon_mobile/core/widgets/custom_button.dart';
 import 'package:okazyon_mobile/features/auth/presentation/controllers/otp_controller.dart';
@@ -60,7 +61,7 @@ class OtpScreen extends ConsumerWidget {
             children: [
               SizedBox(
                 height: AppSizes.screenHeight(context) * 0.25,
-                child: SvgPicture.asset('assets/images/otp.svg'),
+                child: SvgPicture.asset(AppImageStrings.otp),
               ),
               const SizedBox(height: AppSizes.spaceBtwSections),
               Text(

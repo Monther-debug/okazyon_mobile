@@ -28,8 +28,8 @@ class BottomNavBar extends StatelessWidget {
           topRight: Radius.circular(20),
         ),
         child: BottomNavigationBar(
-          backgroundColor: Colors.white, // ensure pure white background
-          elevation: 0, // flat look
+          backgroundColor: Colors.white, 
+          elevation: 0, 
           currentIndex: currentIndex,
           onTap: onTap,
           type: BottomNavigationBarType.fixed,

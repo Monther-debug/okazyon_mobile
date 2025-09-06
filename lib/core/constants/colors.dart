@@ -10,4 +10,8 @@ class AppColors {
   static const Color textPrimary = Color(0xFF222222);
   static const Color textSecondary = Color(0xFF9B9B9B);
   static const Color textWhite = Color(0xFFFFFFFF);
+
+  // Extended palette for new UI elements
+  static const Color error = Color(0xFFEF5350);
+  static const Color lightGrey = Color(0xFFF2F2F2);
 }
