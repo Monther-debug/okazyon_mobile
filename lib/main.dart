@@ -3,5 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:okazyon_mobile/app/app.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const
+   ProviderScope(
+    child:
+     MyApp())
+     
+     );
 }

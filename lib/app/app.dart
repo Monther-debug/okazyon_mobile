@@ -6,8 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:okazyon_mobile/core/providers/locale_provider.dart';
 import 'package:okazyon_mobile/core/providers/theme_provider.dart';
 import 'package:okazyon_mobile/core/theme/theme.dart' as app_theme;
-import 'package:okazyon_mobile/features/auth/presentation/screens/login_screen.dart';
-import 'package:okazyon_mobile/features/home/presentation/screens/home_screen.dart';
 import 'package:okazyon_mobile/features/main_nav/presentation/screens/main_nav_screen.dart';
 
 class MyApp extends ConsumerWidget {
@@ -32,7 +30,6 @@ class MyApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      // Use Poppins for LTR and Almarai for RTL
       builder: (context, child) {
         final isRTL = Directionality.of(context) == TextDirection.rtl;
         final baseTheme =
