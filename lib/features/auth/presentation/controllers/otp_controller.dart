@@ -56,14 +56,16 @@ class OtpController extends StateNotifier<OtpState> {
   }
 
   Future<void> verifyOtp(String otp, BuildContext context) async {
+    // Capture localization BEFORE any async gap to satisfy lint rule.
+    final localizations = AppLocalizations.of(context);
     state = state.copyWith(isLoading: true, clearError: true);
     await Future.delayed(const Duration(seconds: 2));
     if (otp == '123456') {
       state = state.copyWith(isLoading: false);
     } else {
       state = state.copyWith(
-        isLoading: false, 
-        error: AppLocalizations.of(context)!.invalidOtpCode,
+        isLoading: false,
+        error: localizations?.invalidOtpCode ?? 'Invalid OTP code',
       );
     }
   }

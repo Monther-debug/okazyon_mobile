@@ -15,38 +15,42 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeModeProvider);
     final locale = ref.watch(localeProvider);
+    final isRtl = locale?.languageCode == 'ar';
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: AppLocalizations.of(context)?.appTitle ?? 'Okazyon',
-      theme: app_theme.AppTheme.lightTheme,
-      darkTheme: app_theme.AppTheme.darkTheme,
-      themeMode: themeMode,
-      locale: locale,
-      supportedLocales: const [Locale('en'), Locale('ar')],
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      builder: (context, child) {
-        final isRTL = Directionality.of(context) == TextDirection.rtl;
-        final baseTheme =
-            isRTL
-                ? Theme.of(context).copyWith(
-                  textTheme: GoogleFonts.almaraiTextTheme(
-                    Theme.of(context).textTheme,
-                  ),
-                )
-                : Theme.of(context).copyWith(
-                  textTheme: GoogleFonts.poppinsTextTheme(
-                    Theme.of(context).textTheme,
-                  ),
-                );
-        return Theme(data: baseTheme, child: child!);
-      },
-      home: const MainNavScreen(),
+    return Directionality(
+      textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: AppLocalizations.of(context)?.appTitle ?? 'Okazyon',
+        theme: app_theme.AppTheme.lightTheme,
+        darkTheme: app_theme.AppTheme.darkTheme,
+        themeMode: themeMode,
+        locale: locale,
+        supportedLocales: const [Locale('en'), Locale('ar')],
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        builder: (context, child) {
+          final isRTL = Directionality.of(context) == TextDirection.rtl;
+          final baseTheme =
+              isRTL
+                  ? Theme.of(context).copyWith(
+                      textTheme: GoogleFonts.almaraiTextTheme(
+                        Theme.of(context).textTheme,
+                      ),
+                    )
+                  : Theme.of(context).copyWith(
+                      textTheme: GoogleFonts.poppinsTextTheme(
+                        Theme.of(context).textTheme,
+                      ),
+                    );
+          return Theme(data: baseTheme, child: child!);
+        },
+        home: const MainNavScreen(),
+      ),
     );
   }
 }

@@ -31,7 +31,7 @@ class FeaturedDealCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSizes.borderRadiusLg),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 5,
           ),

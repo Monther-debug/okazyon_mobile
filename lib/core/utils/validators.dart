@@ -43,7 +43,6 @@ class CustomValidator {
     if (value == null || value.isEmpty) {
       return AppLocalizations.of(context)!.pleaseEnterPhone;
     }
-    // Remove any non-digit characters for validation
     String phoneNumber = value.replaceAll(RegExp(r'[^\d]'), '');
 
     if (phoneNumber.length < 10) {
